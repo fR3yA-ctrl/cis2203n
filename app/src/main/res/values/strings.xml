@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Hello Campus</string>
+    <string name="student_id">ID: 1234567</string>
+    <string name="department">College of Computer Studies</string>
+    <string name="chairwoman">Jane Doe</string>
+    <string name="button_text">Department Chairwoman</string>
+
+</resources>
