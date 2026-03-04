@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/tvCounter"
-        android:text="0"
+        android:text="@string/counter_initial"
         android:textSize="30sp"
         android:layout_marginBottom="20dp"
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
 
     <Button
         android:id="@+id/btnIncrement"
-        android:text="Increment"
+        android:text="@string/btn_increment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
