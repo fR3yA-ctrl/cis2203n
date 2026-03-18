@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Custom Operator — multiplies display value by 5.59 (Student ID: xxx559)
         findViewById(R.id.btnCustom).setOnClickListener(v -> applyCustomOperator());
+
+        // ← ADD THIS: Restore state after rotation
+        if (savedInstanceState != null) {
+            operandA    = savedInstanceState.getString("operanda", "");
+            operandB    = savedInstanceState.getString("operandB", "");
+            operator    = savedInstanceState.getString("operator", "");
+            operatorSet = savedInstanceState.getBoolean("operatorSet", false);
+            tvDisplay.setText(savedInstanceState.getString("display", "0"));
+        }
     }
 
     private void setOperator(String op) {
@@ -101,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void applyCustomOperator() {
-        // Custom Operator: multiplies current display value by 5.59
-        // Based on last 3 digits of Student ID: 559
         String current = tvDisplay.getText().toString();
         try {
             double value = Double.parseDouble(current);
@@ -134,5 +143,16 @@ public class MainActivity extends AppCompatActivity {
         operandB = "";
         operator = "";
         operatorSet = false;
+    }
+
+    // ← ADD THIS: Save state before rotation
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("operanda", operandA);
+        outState.putString("operandB", operandB);
+        outState.putString("operator", operator);
+        outState.putBoolean("operatorSet", operatorSet);
+        outState.putString("display", tvDisplay.getText().toString());
     }
 }
